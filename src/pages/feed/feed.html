@@ -5,64 +5,66 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
     <ion-title>Feed</ion-title>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content padding>
+
+  <ion-item>
+    <ion-avatar item-start>
+      <img src="assets/imgs/nami2.png">
+    </ion-avatar>
+    <h2 class="feed_title">{{ objecto_feed.titulo }}</h2>
+    <p class="feed_date">{{objecto_feed.data}}</p>
+  </ion-item>
+
+  <img src="assets/imgs/lol1.jpg">
+
+  <ion-card-content>
+    <p>{{objecto_feed.descricao}}</p>
+  </ion-card-content>
+
+  <ion-row>
+    <ion-col>
+      <button ion-button icon-start clear small>
+        <ion-icon name="thumbs-up"></ion-icon>
+        <div>{{objecto_feed.qntd_likes}} Likes</div>
+      </button>
+    </ion-col>
+    <ion-col>
+      <button ion-button icon-start clear small>
+        <ion-icon name="text"></ion-icon>
+        <div>{{objecto_feed.qntd_comments}} Comments</div>
+      </button>
+    </ion-col>
+    <ion-col center text-center>
+      <ion-note>
+        {{objecto_feed.time_comment}}
+      </ion-note>
+    </ion-col>
+  </ion-row>
+
   <!--<h1>Nome do Usuário Título </h1>-->
-  <ion-card>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
 
-    <ion-item>
-      <ion-avatar item-start>
-        <img src="assets/imgs/nami2.png">
-      </ion-avatar>
-      <h2 class="feed_title">{{ nome_usuario }}</h2>
-      <p class="feed_date">13 Janeiro, 1998</p>
-    </ion-item>
-
-    <img src="assets/imgs/lol1.jpg">
-
-    <ion-card-content>
-      <p>Atualização já disponivel.</p>
-    </ion-card-content>
-
-    <ion-row>
-      <ion-col>
-        <button ion-button icon-start clear small>
-          <ion-icon name="thumbs-up"></ion-icon>
-          <div>937 Likes</div>
-        </button>
-      </ion-col>
-      <ion-col>
-        <button ion-button icon-start clear small>
-          <ion-icon name="text"></ion-icon>
-          <div>519 Comments</div>
-        </button>
-      </ion-col>
-      <ion-col center text-center>
-        <ion-note>
-          12h ago
-        </ion-note>
-      </ion-col>
-    </ion-row>
+  <ion-card *ngFor="let filme of lista_filmes">
 
     <ion-item>
       <ion-avatar item-start>
         <img src="assets/imgs/draven1.png">
       </ion-avatar>
-      <h2 class="feed_title">{{ nome_usuario2 }}</h2>
-      <p class="feed_date"> 25 Março, 1997</p>
+      <h2 class="feed_title">{{ filme.original_title }}</h2>
+      <p class="feed_date"> {{filme.release_date}}</p>
     </ion-item>
 
-    <img src="assets/imgs/lol2.jpg">
+    <img [src]="'https://image.tmdb.org/t/p/w500/' + filme.backdrop_path">
 
     <ion-card-content>
-      <p>O primeiro #PENTA a gente nunca esquece.</p>
+      <p>{{filme.overview}}</p>
     </ion-card-content>
 
     <ion-row>
@@ -84,6 +86,10 @@
         </ion-note>
       </ion-col>
     </ion-row>
-
+    <button ion-button block (click)="abrirDetalhes(filme)">Detalhes</button>
   </ion-card>
+
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

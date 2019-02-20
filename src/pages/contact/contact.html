@@ -1,24 +1,32 @@
+<ion-menu [content]="content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <button ion-item (click)="abrirPerfil()">
+        Perfil
+      </button>
+      <button ion-item (click)="abrirSobre()">
+        Sobre
+      </button>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
 <ion-header>
+
   <ion-navbar>
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
     <ion-title>
-      Contato
+      Configurações
     </ion-title>
   </ion-navbar>
-</ion-header>
 
-<ion-content padding="">
-  <ion-list>
-    <ion-list-header>Me siga no Twitter</ion-list-header>
-    <ion-item>
-      <ion-icon name="logo-twitter" item-start></ion-icon>
-      @ItsTzVieira
-    </ion-item>
-  </ion-list>
-  <ion-list>
-    <ion-list-header>Me siga no Instagram</ion-list-header>
-    <ion-item>
-      <ion-icon name="logo-instagram" item-start></ion-icon>
-      @ThiVieira_
-    </ion-item>
-  </ion-list>
-</ion-content>
+</ion-header>
+<ion-nav id="nav" #content [root]="rootPage"></ion-nav>
